@@ -32,8 +32,8 @@ export COUNTRY=$( curl -s ipinfo.io/country )
 export WAKTU=$( curl -s ipinfo.ip/timezone )
 export CITY=$( curl -s ipinfo.io/city )
 export REGION=$( curl -s ipinfo.io/region )
-export WAKTUE=$( curl -s ipinfo.io/timezone )
-export koordinat=$( curl -s ipinfo.io/loc )
+export WAKTU=$( curl -s ipinfo.io/timezone )
+export Koordinat=$( curl -s ipinfo.io/loc )
 
 # // TOTAL RAM
 export tram=$( free -m | awk 'NR==2 {print $2}' )
