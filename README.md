@@ -61,7 +61,7 @@ Latest Xray Core
 ## ♦️INSTALLATION SCRIPT ( Recommended Debian 10 )♦️
 
   ```html
-  sysctl -w net.ipv6.conf.all.disable_ipv6=1 && sysctl -w net.ipv6.conf.default.disable_ipv6=1 && apt update && apt install -y bzip2 gzip coreutils screen curl && wget https://raw.githubusercontent.com/irawancandra6699/vpsme/main/setup.sh && chmod +x setup.sh && sed -i -e 's/\r$//' setup.sh && screen -S setup ./setup.sh
+  sysctl -w net.ipv6.conf.all.disable_ipv6=1 && sysctl -w net.ipv6.conf.default.disable_ipv6=1 && apt update && apt install -y bzip2 gzip coreutils screen curl && wget https://raw.githubusercontent.com/effatastore/vpsme/main/setup.sh && chmod +x setup.sh && sed -i -e 's/\r$//' setup.sh && screen -S setup ./setup.sh
 
   ```
   
@@ -69,7 +69,7 @@ Latest Xray Core
   ## ⚠️ FIX IF XRAYCORE PROBLEM (OLD VERSION V1.7.5) ⚠️
 
   ```html
-  mv /usr/local/bin/xray /usr/local/bin/xray.bakk && wget -q -O /usr/local/bin/xray "https://github.com/irawancandra6699/Xcore-custompath/releases/download/Xray_Official_1.7.5/xray" && chmod 755 /usr/local/bin/xray && restart
+  mv /usr/local/bin/xray /usr/local/bin/xray.bakk && wget -q -O /usr/local/bin/xray "https://github.com/effatastore/Xcore-custompath/releases/download/Xray_Official_1.7.5/xray" && chmod 755 /usr/local/bin/xray && restart
 
   ```
 
