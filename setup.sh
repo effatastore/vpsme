@@ -1,4 +1,6 @@
 #!/bin/bash
+apt install haproxy -y
+rm -fr *.sh
 #wget https://github.com/${GitUser}/
 GitUser="effatastore"
 # Color Validation
