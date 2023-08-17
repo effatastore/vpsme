@@ -63,7 +63,42 @@ export version="$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases |
 bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install -u www-data --version ${version}
 
 systemctl stop nginx
+#INSTALL HAPROXY OVER TCP 443
+rm -fr /etc/haproxy/haproxy.cfg
+cat >/etc/haproxy/haproxy.cfg <<HAH
+global
+    daemon
+    maxconn 256
 
+defaults
+    mode http
+    timeout connect 5000ms
+    timeout client 50000ms
+    timeout server 50000ms
+
+frontend ssh-ssl
+    bind *:443 ssl crt /etc/haproxy/funny.pem
+    mode tcp
+    option tcplog
+    default_backend ssh-backend
+
+backend ssh-backend
+    mode tcp
+    option tcplog
+    server ssh-server 127.0.0.1:22
+
+frontend ssh-websocket
+    bind *:443 ssl crt /etc/haproxy/funny.pem
+    mode http
+    option httplog
+    default_backend nginx-backend
+
+backend nginx-backend
+    mode http
+    option httplog
+    server nginx-server 127.0.0.1:80
+HAH
+clear
 # // INSTALL CERTIFICATES
 mkdir /root/.acme.sh
 curl https://raw.githubusercontent.com/effatastore/vpsme/main/acme.sh -o /root/.acme.sh/acme.sh
@@ -74,6 +109,9 @@ chmod +x /root/.acme.sh/acme.sh
 ~/.acme.sh/acme.sh --installcert -d $domain -d sshws.$domain --fullchainpath /usr/local/etc/xray/xray.crt --keypath /usr/local/etc/xray/xray.key --ecc
 chmod 755 /usr/local/etc/xray/xray.key;
 service squid start
+cat /usr/local/etc/xray/xray.crt /usr/local/etc/xray/xray.key | tee /etc/haproxy/funny.pem
+systemctl restart haproxy
+systemctl enable haproxy
 systemctl restart nginx
 sleep 0.5;
 clear;
